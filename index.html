@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Prime Daifugo Tools</title>
+</head>
+<body style="font-family:Verdana,sans-serif">
+
+<h1>Prime Daifugo Tools</h1>
+
+<p>
+    <input type="text" id="prime_check_input"/>
+    <button type="button" onclick="primeChecker()">Is it prime?</button>
+    <label id="prime_check_msg" style="font-size:12px;"></label>
+</p>
+
+<p>
+    <div style="font-weight:bold;">Prime finder</div>
+    <input type="text" id="find_candidate_input"/>
+    <button type="button" onclick="findCandidates()">Find!</button>
+    <div style="font-size:12px;"> Type cards like "2,4,5,*" (* is a joker)</div>
+    <label id="find_candidate_msg" style="font-size:12px;"></label>
+    <div id="find_candidate_result">        
+    </div>
+</p>
+
+</body>
+<script src="code.js"></script>
+</html>
