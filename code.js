@@ -1,5 +1,5 @@
 const MAX_NUM = 2000000000;
-const MAX_CARD_NUM = 5;
+const MAX_CARD_NUM = 7;
 
 function primeChecker() {
     let inputElement = document.getElementById('prime_check_input');
@@ -8,10 +8,10 @@ function primeChecker() {
 }
 
 function checkIsPrime(value) {
-    if(!value) return "";
+    if(!value) return "Please enter a number greater than 2 to check its primality.";
     let parsed = parseInt(value);
-    if(isNaN(parsed) || parsed < 2) return "invalid";
-    if(parsed > MAX_NUM) return "too large to process";
+    if(isNaN(parsed) || parsed < 2) return "Invalid Number";
+    if(parsed > MAX_NUM) return "Too large to process";
     if(isPrime(parsed))
         return value + " is a prime number!";
     else
@@ -52,7 +52,7 @@ function findCandidates() {
 
 // value guaranteed not to be an Empty
 function isValidCards(value) {
-    values = value.split(',').map(x => x.trim());
+    values = value.split(' ').map(x => x.trim());
 
     // more than 2 jokers
     if(values.filter(x => x == '*').length > 2)
@@ -70,7 +70,7 @@ function isValidCard(value) {
 function runFindCandidates(element, value) {
     let ans = [];
     let cur = [];
-    let values = value.split(',').map(x => x.trim());
+    let values = value.split(' ').map(x => x.trim());
     let usedIndices = new Set();
 
     runFindCandidates_Dfs(element, ans, cur, values, usedIndices);
@@ -163,7 +163,20 @@ function getAns(values, cur, joker1, joker2) {
 
 function updateResult(element, ans) {
     ans.sort(ansCompare);
+    ans = ans.map(x => x.toString());
+    ans = distinct(ans);
     element.innerHTML = ans.join("<br>");
+}
+
+function distinct(ans) {
+    let ret = [];
+    let set = new Set();
+    for(let i=0; i<ans.length; i++) {
+        if(set.has(ans[i])) continue;
+        ret.push(ans[i]);
+        set.add(ans[i]);
+    }
+    return ret;
 }
 
 function ansCompare(a, b) {
