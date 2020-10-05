@@ -58,6 +58,12 @@ function isValidCards(value) {
     if(values.filter(x => x == '*').length > 2)
         return false;
 
+    // more than 4 same cards
+    for(let i=1; i<=13; i++) {
+        if(values.filter(x => x == i.toString()).length > 4)
+            return false;
+    }
+
     return values.length > 0 && values.every(x => isValidCard(x));
 }
 
@@ -103,7 +109,7 @@ function evalCandidate(element, values, ans, cur, joker1=-1, joker2=-1) {
     if(joker1 == -1 && jokerNum != 0) {
         for(let j1=0; j1<=13; j1++)
         {
-            for(let j2=-1; j2<=12; j2++)
+            for(let j2=-1; j2<=13; j2++)
             {
                 if(jokerNum == 1 && j2 != -1) break;
                 if(jokerNum == 2 && j2 == -1) continue;
